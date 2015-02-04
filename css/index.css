@@ -1,0 +1,33 @@
+#clock {
+    font-size: 60px;
+    color: white;
+    text-align: center;
+}
+
+#forecastLabel {
+    font-size: 18px;
+}
+
+#forecastIcon {
+    margin: 0px auto;
+}
+
+.cold {
+    background-color: #95A5A6;
+}
+
+.chilly {
+    background-color: #1ABC9C;
+}
+
+.nice {
+    background-color: #2980B9;
+}
+
+.warm {
+    background-color: #E67E22;
+}
+
+.hot {
+    background-color: #E74C3C;
+}
