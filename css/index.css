@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 #clock {
     font-size: 60px;
     color: white;
