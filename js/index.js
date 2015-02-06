@@ -41,11 +41,13 @@ function hideAlarmPopup() {
     $("#popup").addClass("hide");
 }
 
-function insertAlarm(time, alarmName) {
+function insertAlarm(time, alarmName, objID) {
     var newdiv = $("<div></div>");
     newdiv.addClass("flexable");
+    newdiv.addClass(objID);
     newdiv.append("<div class='name'>" + alarmName + "</div>");
-    newdiv.append("<div class='time'>" + time + "</div><input type='button' value='Delete Alarm' class='button' onclick='deleteAlarm()'/>");
+    newdiv.append("<div class='time'>" + time + "</div>");
+    newdiv.append("<input type='button' value='Delete Alarm' class='button' id='" + objID + "' onclick='deleteAlarm(this)'/>");
     $("#alarms").append(newdiv);
 }
 
@@ -58,9 +60,9 @@ function addAlarm() {
 
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      alarmObject.save({"time": time,"alarmName": alarmName, "objID": alarmObject.id}, {
       success: function(object) {
-          insertAlarm(time, alarmName);
+          insertAlarm(time, alarmName, alarmObject.id);
           hideAlarmPopup();
       }
     });
@@ -74,22 +76,24 @@ function getAllAlarms() {
     query.find({
         success: function(results) {
             for (var i = 0; i < results.length; i++) {
-                insertAlarm(results[i].get('time'), results[i].get('alarmName'));
+                insertAlarm(results[i].get('time'), results[i].get('alarmName'), results[i].id);
             }
         }
     });
 }
 
-function deleteAlarm() {
-    var index = this.index();
+function deleteAlarm(object) {
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject);
-    query.find({
-        success: function(results) {
-            for (var i = 0; i < results.length; i++) {
-                if(results[i].get('object.id') == index)
-                    results[i].destroy({});
-            }
+    var objID = $(object).attr("id");
+    query.get(objID, {
+        success: function(result) {
+            result.destroy({
+                success: function(complete) {
+                    //window.location.reload();
+                    $("." + objID).html(" ");
+                }
+            });
         }
     });
 }
