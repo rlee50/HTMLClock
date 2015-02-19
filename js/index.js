@@ -111,6 +111,7 @@ function signinCallback(authResult) {
     // Hide the sign-in button now that the user is authorized, for example:
     document.getElementById('signinButton').setAttribute('style', 'display: none');
     gapi.client.load('plus', 'v1', function() {
+        console.log("loaded");
         var request = gapi.client.plus.people.get({
           'userId' : 'me'
         });
