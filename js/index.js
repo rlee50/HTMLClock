@@ -58,17 +58,23 @@ function addAlarm() {
     var alarmName = $("#alarmName option:selected").text();
     var time = hours + ":" + mins + " " + ampm;
 
+    Parse.initialize("G2MG1grUdJw2wafABmzAyI4XMKMuyr1jD9we5RI8", "pO9iDawMGCTTz4IRUuOvW3zwYoPjqzgVCl1YievQ");
+
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName, "objID": alarmObject.id}, {
-      success: function(object) {
-          insertAlarm(time, alarmName, alarmObject.id);
-          hideAlarmPopup();
-      }
+    alarmObject.set("time", time);
+    alarmObject.set("alarmName", alarmName);
+    var userid = document.getElementById("userid").innerHTML;
+    alarmObject.set("userid", userid);
+    alarmObject.save(null, {
+        success: function(object) {
+            insertAlarm(time, alarmName, alarmObject.id);
+            hideAlarmPopup();
+        }
     });
 }
 
-function getAllAlarms() {
+function getAllAlarms(userid) {
     Parse.initialize("G2MG1grUdJw2wafABmzAyI4XMKMuyr1jD9we5RI8", "pO9iDawMGCTTz4IRUuOvW3zwYoPjqzgVCl1YievQ");
 
     var AlarmObject = Parse.Object.extend("Alarm");
@@ -76,7 +82,8 @@ function getAllAlarms() {
     query.find({
         success: function(results) {
             for (var i = 0; i < results.length; i++) {
-                insertAlarm(results[i].get('time'), results[i].get('alarmName'), results[i].id);
+                if(results[i].get('userid') == userid)
+                    insertAlarm(results[i].get('time'), results[i].get('alarmName'), results[i].id);
             }
         }
     });
@@ -98,6 +105,32 @@ function deleteAlarm(object) {
     });
 }
 
+function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+    // Update the app to reflect a signed in user
+    // Hide the sign-in button now that the user is authorized, for example:
+    document.getElementById('signinButton').setAttribute('style', 'display: none');
+    var request = gapi.client.plus.people.get({
+      'userId' : 'me'
+    });
+    request.execute(function(resp) {
+      getAllAlarms(resp.id);
+      //var newdiv = $("<div></div>");
+      //newdiv.addClass("flexable");
+      //newdiv.append("<div class='displayName'>" + resp.displayName + "</div>");
+      //$("#displayName").append(newdiv);
+      document.getElementById("displayName").innerHTML = resp.displayName;
+      document.getElementById("userid").innerHTML = resp.id;
+    });
+  } else {
+    // Update the app to reflect a signed out user
+    // Possible error values:
+    //   "user_signed_out" - User is signed-out
+    //   "access_denied" - User denied access to your app
+    //   "immediate_failed" - Could not automatically log in the user
+    console.log('Sign-in state: ' + authResult['error']);
+  }
+}
+
 getTime();
 getTemp();
-getAllAlarms();
