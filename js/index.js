@@ -114,7 +114,7 @@ function signinCallback(authResult) {
         var request = gapi.client.plus.people.get({
           'userId' : 'me'
         });
-    })
+    });
     request.execute(function(resp) {
       getAllAlarms(resp.id);
       //var newdiv = $("<div></div>");
