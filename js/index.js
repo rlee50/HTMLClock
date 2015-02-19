@@ -45,7 +45,7 @@ function insertAlarm(time, alarmName, objID) {
     var newdiv = $("<div></div>");
     newdiv.addClass("flexable");
     newdiv.addClass(objID);
-    newdiv.append("<div class='name'>" + alarmName + "' - '</div>");
+    newdiv.append("<div class='name'>" + alarmName + " - </div>");
     newdiv.append("<div class='time'>" + time + "</div>");
     newdiv.append("<input type='button' value='Delete Alarm' class='button' id='" + objID + "' onclick='deleteAlarm(this)'/>");
     $("#alarms").append(newdiv);
