@@ -55,7 +55,7 @@ function addAlarm() {
     var hours = $("#hours option:selected").text();
     var mins = $("#mins option:selected").text();
     var ampm = $("#ampm option:selected").text();
-    var alarmName = $("#alarmName").text();
+    var alarmName = $("#alarmName").val();
     var time = hours + ":" + mins + " " + ampm;
 
     Parse.initialize("G2MG1grUdJw2wafABmzAyI4XMKMuyr1jD9we5RI8", "pO9iDawMGCTTz4IRUuOvW3zwYoPjqzgVCl1YievQ");
