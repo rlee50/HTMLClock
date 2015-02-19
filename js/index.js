@@ -110,7 +110,7 @@ function signinCallback(authResult) {
     // Update the app to reflect a signed in user
     // Hide the sign-in button now that the user is authorized, for example:
     document.getElementById('signinButton').setAttribute('style', 'display: none');
-    $("#addAlarm").removeClass("hide");
+    document.getElementById('addAlarm').className = 'button';
     gapi.client.load('plus', 'v1', function() {
         var request = gapi.client.plus.people.get({
           'userId' : 'me'
