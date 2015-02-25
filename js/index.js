@@ -4,9 +4,12 @@ function getTemp() {
     $.getJSON("https://api.forecast.io/forecast/c0a1d30b8286511ce5c34f8d3aa02ec0/" + latitude
           + "," + longitude + "?callback=?", function(data) {
             console.log(data);
-        $("#forecastLabel").html(data.daily.summary);
-        var icon = data.daily.icon;
+        //$("#forecastLabel").html(data.daily.summary);
+        $("#forecastLabel").html(data.currently.summary);
+        //var icon = data.daily.icon;
+        var icon = data.currently.icon;
         $("#forecastIcon").attr("src", "img/" + data.daily.icon + ".png");
+        /*
         var counter = 0;
         var temp = data.daily.data[counter++].temperatureMax;
         while(counter < data.daily.data.length) {
@@ -14,6 +17,8 @@ function getTemp() {
                 temp = data.daily.data[counter].temperatureMax;
             counter++;
         }
+        */
+        var temp = data.currently.temperature;
         var backC;
         if(temp < 60)
             backC = "cold";
