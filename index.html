@@ -9,6 +9,21 @@
 <body>
     <h1>Weather Clock</h1>
     <p id="clock"></p>
+    <script>
+      function getLocation() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(getPosition);
+          } else {
+              document.getElementById("lat") = "35.300399"
+              document.getElementById("lng") = "-120.662362";
+          }
+      }
+
+      function getPosition(position) {
+        document.getElementById("lat") = position.coords.latitude;
+        document.getElementById("lng") = position.coords.longitude;
+      }
+    </script>
     <div id="lat"></div>
     <div id="lng"></div>
     <div style="text-align:center" id="forecastLabel"></div>

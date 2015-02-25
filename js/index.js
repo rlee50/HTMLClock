@@ -138,20 +138,6 @@ function signinCallback(authResult) {
   }
 }
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getPosition);
-    } else {
-        document.getElementById("lat") = "35.300399"
-        document.getElementById("lng") = "-120.662362";
-    }
-}
-
-function getPosition(position) {
-  document.getElementById("lat") = position.coords.latitude;
-  document.getElementById("lng") = position.coords.longitude;
-}
-
 getTime();
 getLocation();
 getTemp();
