@@ -23,6 +23,8 @@
         console.log("latitude: " + position.coords.latitude);
         document.getElementById("lat").innerHTML = position.coords.latitude;
         document.getElementById("lng").innerHTML = position.coords.longitude;
+        getLocation();
+        getTemp();
       }
     </script>
     <div id="lat" class="hide"></div>
