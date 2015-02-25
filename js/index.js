@@ -1,3 +1,7 @@
+getTime();
+getLocation();
+getTemp();
+
 function getTemp() {
   var latitude = document.getElementById("lat").innerHTML;
   var longitude = document.getElementById("lng").innerHTML;
@@ -137,7 +141,3 @@ function signinCallback(authResult) {
     console.log('Sign-in state: ' + authResult['error']);
   }
 }
-
-getTime();
-getLocation();
-getTemp();
