@@ -1,10 +1,9 @@
 function getTemp() {
   var latitude = document.getElementById("lat").innerHTML;
   var longitude = document.getElementById("lng").innerHTML;
-  console.log(latitude);
-  console.log(longitude);
     $.getJSON("https://api.forecast.io/forecast/c0a1d30b8286511ce5c34f8d3aa02ec0/" + latitude
           + "," + longitude + "?callback=?", function(data) {
+            console.log(data);
         $("#forecastLabel").html(data.daily.summary);
         var icon = data.daily.icon;
         $("#forecastIcon").attr("src", "img/" + data.daily.icon + ".png");
@@ -141,5 +140,3 @@ function signinCallback(authResult) {
 }
 
 getTime();
-getLocation();
-getTemp();
