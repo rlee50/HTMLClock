@@ -14,14 +14,14 @@
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(getPosition);
           } else {
-              document.getElementById("lat") = "35.300399"
-              document.getElementById("lng") = "-120.662362";
+              document.getElementById("lat").innerHTML = "35.300399"
+              document.getElementById("lng").innerHTML = "-120.662362";
           }
       }
 
       function getPosition(position) {
-        document.getElementById("lat") = position.coords.latitude;
-        document.getElementById("lng") = position.coords.longitude;
+        document.getElementById("lat").innerHTML = position.coords.latitude;
+        document.getElementById("lng").innerHTML = position.coords.longitude;
       }
     </script>
     <div id="lat"></div>
