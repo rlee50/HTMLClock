@@ -139,3 +139,5 @@ function signinCallback(authResult) {
 }
 
 getTime();
+getLocation();
+getTemp();
