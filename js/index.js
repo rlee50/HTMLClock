@@ -8,7 +8,7 @@ function getTemp() {
         $("#forecastLabel").html(data.currently.summary);
         //var icon = data.daily.icon;
         var icon = data.currently.icon;
-        $("#forecastIcon").attr("src", "img/" + data.daily.icon + ".png");
+        $("#forecastIcon").attr("src", "img/" + icon + ".png");
         /*
         var counter = 0;
         var temp = data.daily.data[counter++].temperatureMax;
