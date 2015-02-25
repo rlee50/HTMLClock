@@ -20,6 +20,7 @@
       }
 
       function getPosition(position) {
+        console.log(position.coords.latitude);
         document.getElementById("lat").innerHTML = position.coords.latitude;
         document.getElementById("lng").innerHTML = position.coords.longitude;
         getLocation();
