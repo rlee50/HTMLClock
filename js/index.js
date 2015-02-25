@@ -1,5 +1,4 @@
 function getTemp() {
-  getLocation();
   var latitude = document.getElementById("lat");
   var longitude = document.getElementById("lng");
     $.getJSON("https://api.forecast.io/forecast/c0a1d30b8286511ce5c34f8d3aa02ec0/" + latitude.innerHTML
@@ -154,4 +153,5 @@ function getPosition(position) {
 }
 
 getTime();
+getLocation();
 getTemp();
