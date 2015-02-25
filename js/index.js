@@ -1,5 +1,9 @@
 function getTemp() {
-    $.getJSON("https://api.forecast.io/forecast/c0a1d30b8286511ce5c34f8d3aa02ec0/35.300399,-120.662362?callback=?", function(data) {
+  getLocation();
+  var latitude = document.getElementById("lat");
+  var longitude = document.getElementById("lng");
+    $.getJSON("https://api.forecast.io/forecast/c0a1d30b8286511ce5c34f8d3aa02ec0/" + latitude.innerHTML
+          + "," + longitude.innerHTML + "?callback=?", function(data) {
         $("#forecastLabel").html(data.daily.summary);
         var icon = data.daily.icon;
         $("#forecastIcon").attr("src", "img/" + data.daily.icon + ".png");
@@ -133,6 +137,20 @@ function signinCallback(authResult) {
     //   "immediate_failed" - Could not automatically log in the user
     console.log('Sign-in state: ' + authResult['error']);
   }
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getPosition);
+    } else {
+        document.getElementById("lat") = "35.300399"
+        document.getElementById("lng") = "-120.662362";
+    }
+}
+
+function getPosition(position) {
+  document.getElementById("lat") = position.coords.latitude;
+  document.getElementById("lng") = position.coords.longitude;
 }
 
 getTime();
