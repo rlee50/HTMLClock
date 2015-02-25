@@ -16,12 +16,14 @@
           } else {
               document.getElementById("lat").innerHTML = "35.300399"
               document.getElementById("lng").innerHTML = "-120.662362";
+              getTemp();
           }
       }
 
       function getPosition(position) {
         document.getElementById("lat").innerHTML = position.coords.latitude;
         document.getElementById("lng").innerHTML = position.coords.longitude;
+        getTemp();
       }
     </script>
     <div id="lat" class="hide"></div>
