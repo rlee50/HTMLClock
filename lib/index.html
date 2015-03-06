@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="oauth.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+  <input id="login" type="button" value="Login" onclick="login()"/>
+
+  <div id="cID" display="hidden"></div>
+  <div id="authType"></div>
+  <div id="cbFunc"></div>
+
+  <script>
+    var imgurFunc = function(token) {
+      $.ajax({
+        url: "https://api.imgur.com/3/account/me",
+        type: "GET",
+        headers: {"Authorization": "Bearer " + token},
+        success: function(result) {
+          alert(result.data.url);
+        },
+        error: function(error) {
+          console.log("Error retrieving username");
+        }
+
+      });
+    }
+    init({"client_id" : "d69da49795bb874", "auth_type" : "token", "callback_function" : "imgurFunc"});
+  </script>
+</body>
+</html>
